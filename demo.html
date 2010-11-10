@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Add Tag Demo</title>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script src="addtags.js" type="text/javascript"></script>
+	<style type="text/css">
+
+		h1{
+			font-size:24px;
+			color:#333;
+		}
+		input[type=text] {
+			border:1px solid #666;
+			-webkit-box-shadow: inset 0px 0px 3px #999;
+			-moz-box-shadow: inset 0px 0px 3px #999;
+			box-shadow: inset 0px 0px 3px #999;
+			width:240px;
+			padding:3px;
+			font-size:12px;
+		}
+		input[type=submit] {
+			border:1px solid #693;
+			-webkit-border-radius:5px;
+			-moz-border-radius:5px;
+			border-radius:5px;
+			-webkit-box-shadow: inset 0px 0px 3px #fff;
+			-moz-box-shadow: inset 0px 0px 3px #fff;
+			box-shadow: inset 0px 0px 3px #fff;
+			background-color:#693;
+			color:#fff;
+			font-size:12px;
+			padding:3px 6px;
+			cursor:pointer;
+		}
+		input[type=submit]:hover {
+			background-color:#7a4;
+			-webkit-box-shadow: inset 0px 1px 3px #fff;
+			-moz-box-shadow: inset 0px 1px 3px #fff;
+			box-shadow: inset 0px 1px 3px #fff;
+		}
+		input[type=reset] {
+			border:1px solid #c90;
+			background-color:#c90;
+			-webkit-border-radius:5px;
+			-moz-border-radius:5px;
+			border-radius:5px;
+			-webkit-box-shadow: inset 0px 0px 3px #fff;
+			-moz-box-shadow: inset 0px 0px 3px #fff;
+			box-shadow: inset 0px 0px 3px #fff;
+			color:#fff;
+			font-size:12px;
+			padding:3px 6px;
+			cursor:pointer;
+		}
+		input[type=reset]:hover {
+			background-color:#da1;
+			-webkit-box-shadow: inset 0px 1px 3px #fff;
+			-moz-box-shadow: inset 0px 1px 3px #fff;
+			box-shadow: inset 0px 1px 3px #fff;
+		}
+		ul#taglist {
+			padding:0px;
+			margin:10px 0;
+			width:350px;
+			list-style-type:none;
+		}
+		ul#taglist:after {
+			display:block;
+			clear:both;
+			height:0;
+			content:"";
+		}
+		ul#taglist li {
+			position:relative;
+			float:left;
+			background-color:#666;
+			color:#fff;
+			-webkit-border-radius:5px;
+			-moz-border-radius:5px;
+			border-radius:5px;
+			padding:3px 3px 3px 6px;
+			margin-right:5px;
+			margin-bottom:5px;
+			font-size:12px;
+		}
+		ul#taglist li input.delete {
+			background-color:transparent;
+			border-width:0px;
+			font-size:10px;
+			color:#ccc;
+			cursor:pointer;
+		}
+		ul#taglist li input.delete:hover {
+			-webkit-border-radius:5px;
+			-moz-border-radius:5px;
+			border-radius:5px;
+			background-color:#333;
+			color:#fff;
+		}
+		p#log{
+			background-color:#eee;
+			-webkit-border-radius:5px;
+			-moz-border-radius:5px;
+			border-radius:5px;
+			border:1px solid #ccc;
+			width:320px;
+			padding:10px;
+		}
+	
+	</style>
+</head>
+<body>
+
+<h1>Add Tags Demo</h1>
+
+<form id="addtag">
+	<input id="taginput" type="text" />
+	<input type="submit" value="add" />
+	<input type="reset" value="reset" />
+</form>
+<ul id="taglist"></ul>
+
+<p id="log"></p>
+
+<script type="text/javascript">
+
+(function(){
+	var tags = ["hoge","fuga","foo","bar"];	
+	var myaddtags = new AddTags( tags );
+	myaddtags.bind( "change", function(){
+		$("#log").html( this.toString() );
+	});
+	$("#addtag input[type=reset]").click( function(){
+		myaddtags.clear();
+	});
+	myaddtags.run();
+
+})();
+
+
+</script>
+	
+</body>
+</html>
