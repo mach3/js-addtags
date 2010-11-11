@@ -69,13 +69,13 @@ Add event listener using `bind`, us `unbind` to remove.
 - `add( tag )`  
 	Add tag(s) to the list.  
 	You can pass also string separated with comma.
-- `remove( tag )`
+- `remove( tag )`  
 	Remove a tag from the list.
-- `clear()`
+- `clear()`  
 	Clear all tags.
-- `refreshList()`
+- `refreshList()`  
 	Refresh the display of ul element containing tags.
-- `toString()`
+- `toString()`  
 	Return tag collection as string separated with comma.
 
 ## Lisence
