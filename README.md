@@ -1,88 +1,104 @@
-#AddTags.js
+# AddTags.js
 
-## This does
+Class help us to create "add tag" interface easily.
 
-- help us controll "Add Tag" interface easily
+## Features
 
-## This doesn't
+- Help us to create "add tag" interface
+- Add event listeners to the html you marked up
+- This does not mark up automatically !
+  ( Except for <li> element containing tag )
 
-- markup automatically ( except for tag list )
+## Version
 
-## Requires
+- 1.1 : Change the rule of marking up
+- 1.0 : First release
 
-- jQuery 1.4 or later
+## Author
 
-### Author
+mach3
 
-- [Mach3.laBlog](http://blog.mach3.jp/)
+- [Mach3.laBlog](http://blog.mach3.jp)
 - [Follow me on Twitter](http://twitter.com/mach3ss)
 
 ## Usage
 
 ### Basic
 
-First of all, markup form and other elements.
+First of all, mark up HTML.
+	
+	<!-- Form element to input -->
+	<input id="tagInput" type="text" />
+	<input id="tagAddButton" type="button" value="add" />
+	<input id="tagResetButton" type="button" value="reset" />
+	
+	<!-- Container to display the tag list -->
+	<ul id="tagList"></ul>
 
-	<!-- form to input tag -->
-	<form id="addtag" action="">
-		<input type="text" id="taginput" />
-		<input type="submit" value="add" />
-		<input type="reset" value="clear" />
-	</form>
+Then, initialize class.
 
-	<!-- list to display tag collection -->
-	<ul id="taglist"></ul>
+	var myaddtags = new AddTags( [ "foo", "bar" ] );
+	myaddtags.run();
 
-Initialize the class, and run it.
+You can pass the tags for default, as argument for constructor.
 
-	<script type="text/javascript">
-	var mytags = new AddTags;
-	mytags.run();
-	</script>
+### Options
 
-### Default tags
+You can configure the markup information with `config` method.
 
-You can pass array of tag collection for default
-as argument for constructor or "setTag" method.
-
-	var mytags = new AddTags( ["hoge","fuga","foo","bar"] );
-	// or 
-	mytags.setTags( ["hoge","fuga","foo","bar"] );
-
-### Configure the selector
-
-Use "config" method to configure the selector for each element.
-
-	mytags.config({
-		form:"form#addtag", // form element
-		input:"input#taginput", // text input to add tag
-		list:"ul#taglist", // list element for display tags added
-		deleteButton:"#taglist li input.delete" // button to delete tag
+	myaddtags.config({
+		tagInput : "#tagInput", // Text input to add tag
+		tagAddButton : "#tagAddButton", // Button to add tag
+		tagResetButton : "#tagResetButton", // Button to clear tags
+		tagList : "#tagList", // List element to display the tags
+		tagDeleteButton : "#tagList li input.delete" // Button to delete the tag
 	});
-
-"deleteButton" is inserted automatically.
-See "refreshList" method of source.
 
 ### Events
 
-This dispatch "change" event when tag list updated.
-Use jQuery.bind to add event listener.
+The only event fired by this class is `change`,  
+triggered when the tag list is updated.  
+Add event listener using `bind`, us `unbind` to remove.
 
-	mytags.bind( mytags.EVENT_CHANGE, function(){
+	myaddtags.bind( myaddtags.EVENT_CHANGE, function( e ){
 		console.log( this.toString() );
 	});
 
-
 ### Other
 
-####remove( tag )
+- `add( tag )`  
+	Add tag(s) to the list.  
+	You can pass also string separated with comma.
+- `remove( tag )`
+	Remove a tag from the list.
+- `clear()`
+	Clear all tags.
+- `refreshList()`
+	Refresh the display of ul element containing tags.
+- `toString()`
+	Return tag collection as string separated with comma.
 
-Remove a tag from the taglist
+## Lisence
 
-####clear()
+The MIT License
 
-Clear all tags
+Copyright (c) 2010 Matsukaze.
 
-####toString()
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-Return tag collection as string separated by comma.
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+

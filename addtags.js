@@ -2,65 +2,77 @@
  * AddTags.js
  * Copyright (c) Matsukaze. All rights reserved.
  * @author mach3
- * @version 1.0
+ * @version 1.1
  * @requires jQuery 1.4 or later
  */
+
 
 var AddTags = function( tags ){
 	this.setTags( tags );
 };
 /**
- * Class to manage the taglist
+ * Class help us to create "add tag" interface easily.
  * @class
+ * @param {array} tags Tags for default
  */
 AddTags.prototype = {
-	EVENT_CHANGE:"change",
-	tags:[],
-	option:{
-		form:"form#addtag",
-		input: "input#taginput",
-		list: "ul#taglist",
-		deleteButton: "#taglist li input.delete"
+	EVENT_CHANGE : "change",
+	tags : [],
+	option : {
+		tagInput : "#tagInput",
+		tagAddButton : "#tagAddButton",
+		tagResetButton : "#tagResetButton",
+		tagList : "#tagList",
+		tagDeleteButton : "#tagList li input.delete"
 	},
 	/**
-	 * Reset tag data
-	 * @param {array} tags
+	 * Set default tag collection
+	 * @param {array} tags Tags for default
+	 * @return {object} AddTags object
 	 */
-	setTags:function( tags ){
+	setTags : function( tags ){
 		this.tags = tags || [];
 		return this;
 	},
 	/**
-	 * Configure containers and elements
-	 * @param {object} option
-	 */ 
-	config:function( option ){
+	 * Set configuration option
+	 * @param {object} option Configuration option
+	 * @return {object} AddTags object
+	 */
+	config : function( option ){
 		this.option = $.extend( {}, this.option, option );
 		return this;
 	},
 	/**
-	 * Add event listeners
+	 * Initialize the UI
+	 * @return {object} AddTags object
 	 */
-	run:function(){
-		$(this.option.form).bind("submit", $.proxy( this._onSubmit, this ));
-		$(this.option.deleteButton).live("click", $.proxy( this._onDelete, this ));
+	run : function(){
+		$(this.option.tagInput).bind( "keypress", $.proxy( this._onKeyPress, this ) );
+		$(this.option.tagAddButton).bind( "click", $.proxy( this._onClickAdd, this ) );
+		$(this.option.tagResetButton).bind( "click", $.proxy( this.clear, this ) );
+		$(this.option.tagDeleteButton).live( "click", $.proxy( this._onClickDelete, this ) );
 		this.refreshList();
 		return this;
 	},
-	_onSubmit:function(){
-		var input = $(this.option.input);
-		this.add( input.val() ) && this.refreshList();
-		input.val("");
-		return false;
+	_onKeyPress : function( e ){
+		if( e.keyCode !== 13 ) return;
+		this._onClickAdd();
 	},
-	_onDelete:function( e ){
+	_onClickAdd : function(){
+		var input = $(this.option.tagInput);
+		this.add( input.val() );
+		input.val("");
+	},
+	_onClickDelete : function( e ){
 		this.remove( $(e.target).attr("data-tag") );
 	},
 	/**
-	 * Add new tag to the taglist, simple string or collection separated by comma.
-	 * @param {string} tag(s)
+	 * Add tag(s) to the list
+	 * @param {string} tag Simple string for tag, or tag collection separated with comma.
+	 * @return {object} AddTags object
 	 */
-	add:function( tag ){
+	add : function( tag ){
 		var _this, changed;
 		_this = this;
 		changed = false;
@@ -73,58 +85,63 @@ AddTags.prototype = {
 			changed = true;
 		});
 		if( changed ){ $(this).trigger( this.EVENT_CHANGE ); }
-		return true;
+		this.refreshList();
+		return this;
 	},
 	/**
-	 * Remove a tag from the taglist
-	 * @param {string} tag
+	 * Remove a tag from the list
+	 * @param {string} tag Tag to remove.
+	 * @return {object} AddTags object
 	 */
-	remove:function( tag ){
-		var c = this.tags.length;
+	remove : function( tag ){
 		this.tags = $.grep( this.tags, function( v, i ){ return v !== tag; } );
 		this.refreshList();
-		if( this.tags.length !== c ){ $(this).trigger( this.EVENT_CHANGE ); }
+		$(this).trigger( this.EVENT_CHANGE );
 		return this;
 	},
 	/**
 	 * Clear all tags
+	 * @return {object} AddTags object
 	 */
-	clear:function(){
+	clear : function(){
 		this.tags = [];
 		this.refreshList();
 		$(this).trigger( this.EVENT_CHANGE );
 		return this;
 	},
 	/**
-	 * Update the display of list
+	 * Refresh the display of ul element containing tags
+	 * @return `object} AddTags object
 	 */
-	refreshList:function(){
+	refreshList : function(){
 		var html, list;
 		html = '<li>{{tag}} '
 		+ '<input type="button" value="X" class="delete" data-tag="{{tag}}" /></li>';
-		list = $(this.option.list).html("");
+		list = $(this.option.tagList).html("");
+		this.tags.sort();
 		$.each( this.tags, function( i, t ){
 			$( html.replace( /{{tag}}/g, t ) ).appendTo( list );
 		});
 		return this;
 	},
 	/**
-	 * Get tag collection as string, separated comma.
+	 * Return tag collection as string separated with comma.
+	 * @return {strgin} Tag collection
 	 */
-	toString:function(){
+	toString : function(){
 		return this.tags.join(",");
 	},
 	/**
-	 * Wrapper of jquery.bind
+	 * Wrapper of jQuery.bind
 	 */
-	bind:function( name, func ){
-		$(this).bind( name, func );
+	bind : function( name, func ){
+		return $(this).bind( name, func );
 	},
 	/**
-	 * Wrapper of jquery.unbind
+	 * Wrapper of jQuery.unbind 
 	 */
-	unbind:function( name, func ){
-		$(this).unbind( name, func );
+	unbind : function( name, func ){
+		return $(this).unbind( name, func );
 	}
 };
 
