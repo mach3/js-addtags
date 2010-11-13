@@ -2,7 +2,7 @@
  * AddTags.js
  * Copyright (c) Matsukaze. All rights reserved.
  * @author mach3
- * @version 1.1
+ * @version 1.2
  * @requires jQuery 1.4 or later
  */
 
@@ -79,6 +79,7 @@ AddTags.prototype = {
 		tag = tag.replace( /^\s+|\s+$/, "" ).split(",");
 		$.each( tag, function( i, t ){
 			if( ! t.length ) return;
+			t = $("<span>").text(t).html();
 			_this.tags.push( t );
 			_this.tags.sort();
 			_this.tags = $.unique( _this.tags ).sort();
