@@ -11,6 +11,7 @@ Class help us to create "add tag" interface easily.
 
 ## Version
 
+- 1.2.1 : Add Erro Handler ( No Error yet )
 - 1.2 : Add escape
 - 1.1 : Change the rule of marking up
 - 1.0 : First release

@@ -144,6 +144,9 @@
 	myaddtags.bind( myaddtags.EVENT_CHANGE, function(){
 		$("#log").html( this.toString() );
 	});
+	myaddtags.bind( myaddtags.EVENT_ERROR, function( e, msg ){
+		console.log( msg );
+	});
 
 	myaddtags.run();
 

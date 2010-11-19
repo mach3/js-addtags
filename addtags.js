@@ -2,7 +2,7 @@
  * AddTags.js
  * Copyright (c) Matsukaze. All rights reserved.
  * @author mach3
- * @version 1.2
+ * @version 1.2.1
  * @requires jQuery 1.4 or later
  */
 
@@ -17,6 +17,7 @@ var AddTags = function( tags ){
  */
 AddTags.prototype = {
 	EVENT_CHANGE : "change",
+	EVENT_ERROR : "error",
 	tags : [],
 	option : {
 		tagInput : "#tagInput",
@@ -143,6 +144,12 @@ AddTags.prototype = {
 	 */
 	unbind : function( name, func ){
 		return $(this).unbind( name, func );
+	},
+	/**
+	 * Error handler
+	 */
+	_error : function( msg ){
+		$(this).trigger( this.EVENT_ERROR, msg );
 	}
 };
 
