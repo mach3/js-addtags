@@ -2,7 +2,7 @@
  * AddTags.js
  * Copyright (c) Matsukaze. All rights reserved.
  * @author mach3
- * @version 1.2.1
+ * @version 1.2.2
  * @requires jQuery 1.4 or later
  */
 

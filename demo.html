@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Add Tag Demo</title>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
 	<script type="text/javascript" src="addtags.js"></script>
 	<style type="text/css">
 		input,p,li{
@@ -133,8 +133,7 @@
 (function(){
 
 	var tags = ["hoge", "fuga", "foo", "bar"];
-	var myaddtags = new AddTags( tags );
-	myaddtags.config({
+	var myaddtags = new AddTags( tags, {
 		tagInput : "#tagInput",
 		tagAddButton : "#tagAddButton",
 		tagResetButton : "#tagResetButton",
