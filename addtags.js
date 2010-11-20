@@ -7,8 +7,11 @@
  */
 
 
-var AddTags = function( tags ){
+var AddTags = function( tags, option ){
+	tags = tags || [];
+	option = option || {};
 	this.setTags( tags );
+	this.config( option );
 };
 /**
  * Class help us to create "add tag" interface easily.
