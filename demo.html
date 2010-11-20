@@ -133,13 +133,14 @@
 (function(){
 
 	var tags = ["hoge", "fuga", "foo", "bar"];
-	var myaddtags = new AddTags( tags, {
-		tagInput : "#tagInput",
-		tagAddButton : "#tagAddButton",
-		tagResetButton : "#tagResetButton",
-		tagList : "#tagList",
-		tagDeleteButton : "#tagList li input.delete"
-	});
+	var config = {
+		input : "#tagInput",
+		addButton : "#tagAddButton",
+		clearButton : "#tagResetButton",
+		list : "#tagList",
+		deleteButton : "#tagList li input.delete"
+	};
+	var myaddtags = new AddTags( config, tags );
 	myaddtags.bind( myaddtags.EVENT_CHANGE, function(){
 		$("#log").html( this.toString() );
 	});

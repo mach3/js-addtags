@@ -23,11 +23,11 @@ AddTags.prototype = {
 	EVENT_ERROR : "error",
 	tags : [],
 	option : {
-		tagInput : "#tagInput",
-		tagAddButton : "#tagAddButton",
-		tagClearButton : "#tagClearButton",
-		tagList : "#tagList",
-		tagDeleteButton : "#tagList .delete"
+		input : "#tagInput",
+		addButton : "#tagAddButton",
+		clearButton : "#tagClearButton",
+		list : "#tagList",
+		deleteButton : "#tagList .delete"
 	},
 	/**
 	 * Set default tag collection
@@ -52,10 +52,10 @@ AddTags.prototype = {
 	 * @return {object} AddTags object
 	 */
 	run : function(){
-		$(this.option.tagInput).bind( "keypress", $.proxy( this._onKeyPress, this ) );
-		$(this.option.tagAddButton).bind( "click", $.proxy( this._onClickAdd, this ) );
-		$(this.option.tagClearButton).bind( "click", $.proxy( this.clear, this ) );
-		$(this.option.tagDeleteButton).live( "click", $.proxy( this._onClickDelete, this ) );
+		$(this.option.input).bind( "keypress", $.proxy( this._onKeyPress, this ) );
+		$(this.option.addButton).bind( "click", $.proxy( this._onClickAdd, this ) );
+		$(this.option.clearButton).bind( "click", $.proxy( this.clear, this ) );
+		$(this.option.deleteButton).live( "click", $.proxy( this._onClickDelete, this ) );
 		this.refreshList();
 		return this;
 	},
@@ -64,7 +64,7 @@ AddTags.prototype = {
 		this._onClickAdd();
 	},
 	_onClickAdd : function(){
-		var input = $(this.option.tagInput);
+		var input = $(this.option.input);
 		this.add( input.val() );
 		input.val("");
 	},
@@ -122,7 +122,7 @@ AddTags.prototype = {
 		var html, list;
 		html = '<li>{{tag}} '
 		+ '<input type="button" value="X" class="delete" data-tag="{{tag}}" /></li>';
-		list = $(this.option.tagList).html("");
+		list = $(this.option.list).html("");
 		this.tags.sort();
 		$.each( this.tags, function( i, t ){
 			$( html.replace( /{{tag}}/g, t ) ).appendTo( list );
