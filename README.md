@@ -40,15 +40,15 @@ First of all, mark up HTML.
 
 Then, initialize class.
 
-	var myaddtags = new AddTags( [ "foo", "bar" ] );
+	var myaddtags = new AddTags( {}, [ "foo", "bar" ] );
 	myaddtags.run();
 
-You can pass the tags for default, as argument for constructor.
+You can pass the tags for default, as 2nd argument for constructor.
 
 ### Options
 
 You can configure the markup information with `config` method,  
-or second argument for constructor.
+or first argument for constructor.
 	
 	var myconfig = {
 		tagInput : "#tagInput", // Text input to add tag
@@ -57,7 +57,7 @@ or second argument for constructor.
 		tagList : "#tagList", // List element to display the tags
 		tagDeleteButton : "#tagList li input.delete" // Button to delete the tag
 	};
-	var myaddtags = new AddTags( [], myconfig );
+	var myaddtags = new AddTags( myconfig );
 
 	// or
 

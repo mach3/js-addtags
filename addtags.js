@@ -7,7 +7,7 @@
  */
 
 
-var AddTags = function( tags, option ){
+var AddTags = function( option, tags ){
 	tags = tags || [];
 	option = option || {};
 	this.setTags( tags );
