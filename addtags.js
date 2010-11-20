@@ -25,9 +25,9 @@ AddTags.prototype = {
 	option : {
 		tagInput : "#tagInput",
 		tagAddButton : "#tagAddButton",
-		tagResetButton : "#tagResetButton",
+		tagClearButton : "#tagClearButton",
 		tagList : "#tagList",
-		tagDeleteButton : "#tagList li input.delete"
+		tagDeleteButton : "#tagList .delete"
 	},
 	/**
 	 * Set default tag collection
@@ -54,7 +54,7 @@ AddTags.prototype = {
 	run : function(){
 		$(this.option.tagInput).bind( "keypress", $.proxy( this._onKeyPress, this ) );
 		$(this.option.tagAddButton).bind( "click", $.proxy( this._onClickAdd, this ) );
-		$(this.option.tagResetButton).bind( "click", $.proxy( this.clear, this ) );
+		$(this.option.tagClearButton).bind( "click", $.proxy( this.clear, this ) );
 		$(this.option.tagDeleteButton).live( "click", $.proxy( this._onClickDelete, this ) );
 		this.refreshList();
 		return this;

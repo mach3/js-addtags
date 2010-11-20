@@ -53,7 +53,7 @@ or first argument for constructor.
 	var myconfig = {
 		tagInput : "#tagInput", // Text input to add tag
 		tagAddButton : "#tagAddButton", // Button to add tag
-		tagResetButton : "#tagResetButton", // Button to clear tags
+		tagClearButton : "#tagClearButton", // Button to clear tags
 		tagList : "#tagList", // List element to display the tags
 		tagDeleteButton : "#tagList li input.delete" // Button to delete the tag
 	};
